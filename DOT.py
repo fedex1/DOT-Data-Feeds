@@ -2,7 +2,13 @@
 DOT API Library
 '''
 import requests
+
+def requests_get(link):
+    print 'QQQ:',link
+    return requests.get(link)
+
 class DOT:
+
     def __init__(self,ID,Key):
         '''
         (Creating Object)
@@ -135,7 +141,7 @@ class DOT:
         self.t_WeeklyTraf
                 ==> Search Weekly Traffic
                 
-        self.t_WeekendTraff
+        self.t_WeekendTraf
                 ==> Search Weekend Traffic
                 
         self.t_SpecialAlerts
@@ -149,12 +155,12 @@ class DOT:
         print information
         if information == self.t_TrafficSpeed:
             ta = 'traffic-advisory/'
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/" + ta +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/" + ta +
                                   information + '.php' +
                                   "?app_id=" + self.id +
                                   "&app_key=" + self.key)
         else:
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+
                                    information+".xml"+
                                    "?app_id="+self.id+
                                    "&app_key=" +self.key)
@@ -195,7 +201,7 @@ class DOT:
          '''
 
         print information
-        self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+
+        self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+
                                information+".xml"+
                                "?app_id="+self.id+
                                "&app_key=" +self.key)
@@ -227,14 +233,14 @@ class DOT:
         
         print information
         if information == self.p_ParkReminder:
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ p +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ p +
                                    information + ".xml" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
             
         
         else:
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ p +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ p +
                                    information+ ".csv" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
@@ -274,20 +280,20 @@ class DOT:
         
         print information
         if contentType == self.zip and information != self.r_LowBridges:
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ ti +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ ti +
                                    information + ".zip" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
         elif contentType == self.zip and information == self.r_LowBridges:
             print 'Low bridge data only comes in KML format'
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ ti +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ ti +
                                    information+ ".kml" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
             
         
         elif contentType == self.kml:
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ ti +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ ti +
                                    information+ ".kml" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
@@ -325,14 +331,14 @@ class DOT:
         print information
         if contentType == self.zip and information != self.b_BikeShelters:
             print 'zip'
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ bi +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ bi +
                                    information + ".zip" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
             
         elif contentType == self.zip and information == self.r_LowBridges:
             print 'Low bridge data only comes in KML format'
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ bi +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ bi +
                                    information+ ".kml" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
@@ -340,7 +346,7 @@ class DOT:
         
         elif contentType == self.kml:
             print 'kml'
-            self.r = requests.get("https://api.cityofnewyork.us/dot/v1/"+ bi +
+            self.r = requests_get("https://api.cityofnewyork.us/dot/v1/"+ bi +
                                    information + ".kml" +
                                    "?app_id=" + self.id +
                                    "&app_key=" + self.key)
